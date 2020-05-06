@@ -2,7 +2,10 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 9001
 const bodyParser = require('body-parser')
+const queries = require('./db/queries.js')
 const cors = require('cors')
+
+const { Conversation } = require('./models/schema')
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -29,7 +32,10 @@ app.get('/info', (request, response) => {
               "url": ""
             },
             "language": "node.js",
-            "sources": "string, the url of a github repository including your backend sources and your frontend sources",
+            "sources": {
+                "frontend": "https://github.com/ParkerBacall/ava_challenge_frontend",
+                "backend": "https://github.com/ParkerBacall/ava_challenge_backend"
+            },
             "answers": {
               "1": "string, answer to the question 1",
               "2": "string, answer to the question 2",
@@ -38,29 +44,18 @@ app.get('/info', (request, response) => {
     })
 })
 
-app.post('mutations', (request, response) =>{
-    response.send({
-        "msg": "an error message, if needed",
-        "ok": "boolean",
-        "text": "string, the current text of the conversation, after applying the mutation"
-    })
+app.post('/mutations', (request, response) =>{
+    queries.mutations.create(request.body)
+    .then(res => response.send(res))  
+    .withFe
 })
 
-app.get('conversations', (request, response) => {
-    response.send({
-        "conversations": [
-            {
-              "id": "string",
-              "lastMutation": "Object, The last mutation applyed on this conversation",
-              "text": "string"
-            },
-            "..."
-          ],
-          "msg": "string, an error message, if needed",
-          "ok": "boolean"
-    })
+app.get('/conversations', async (request, response) => {
+    const conversations = await Conversation.query()
+    .withGraphFetched('mutations')
+    response.send(conversations)
 })
 
-app.delete('coversations', (request, response) => {
-    
+app.delete('/coversations', (request, response) => {
+
 })
