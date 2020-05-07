@@ -47,7 +47,9 @@ app.get('/info', (request, response) => {
 app.post('/mutations', async (request, response) =>{
     if (await Conversation.query().findById(request.body.conversationId)){
          queries.mutations.create(request.body)
+
         .then(res => response.send(res))  
+
     } else{
         await Conversation.query().insert({
             "id": request.body.conversationId,
@@ -55,6 +57,7 @@ app.post('/mutations', async (request, response) =>{
             "text" : request.body.text
           })
           queries.mutations.create(request.body)
+
           .then(res => response.send(res))  
     }
     
@@ -63,7 +66,14 @@ app.post('/mutations', async (request, response) =>{
 app.get('/conversations', async (request, response) => {
     const conversations = await Conversation.query()
     .withGraphFetched('mutations')
-    response.send(conversations)
+
+    response.send({
+        "conversations": [
+            conversations
+        ],
+        "msg": "all good",
+        "ok": true
+    })
 })
 
 app.delete('/conversations/:id', async(request, response) => {
@@ -71,4 +81,8 @@ app.delete('/conversations/:id', async(request, response) => {
     .for(request.params.id)
     .delete()
     await Conversation.query().deleteById(request.params.id);
+    response.status(204).send({
+        "msg": "string, an error message, if needed",
+        "ok": true
+    })
 })
