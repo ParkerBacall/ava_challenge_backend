@@ -37,9 +37,9 @@ app.get('/info', (request, response) => {
                 "backend": "https://github.com/ParkerBacall/ava_challenge_backend"
             },
             "answers": {
-              "1": "",
-              "2": "string, answer to the question 2",
-              "3": "I can't really say much that I would add, as I am just not sure exactly what the team is looking for. However I would personally add more room for creativity. There is a lot of cool functionallity I would have added on the frontend but unfortunetly I was bogged down by the difficulty of the challenge."
+              "1": "The first step for me was to make sure I understood the problem. I dedicated around an hour to learning about the algoritm being used and making sure I understood all of the instructions. Then I broke down how I would be solving the problems, what languages I would be using, what libraries, etc. After that I broke down the challenge even further into think vertial slices and went at it. I also made sure to connect my frontend and backend early.",
+              "2": "Haha, what wouldn't I add? Just kidding, obviously I would have wanted my app to meet all of the criteria. But, in addition to that I would have loved to give the frontend a nice presentation mimicing google docs. I liked the idea of having a big input block where the algorithm can be edited, sending mutations to the backend, and that would probably be the next feature I added. I also was excited about using websockets to get mutations made by other users showing up in real time, like a chat. If I added thos two features I would just need to implement the algoritm to deal with conflicts. For bonus features I was thinking about showing who is currently editing the conversation and implementing an undo button.",
+              "3": "I would not start the instructions with going in depth on the algorith. I ended up focusing to much on that before getting into what the app was really going to be and I lost a lot of time that I could have spent showing what I know. Ideally the instructions would be a step by step walkthough of what is expected but I found myself jumping around those instructions a lot."
             }
     })
 })
