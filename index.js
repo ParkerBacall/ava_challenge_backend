@@ -56,6 +56,9 @@ app.get('/conversations', async (request, response) => {
     response.send(conversations)
 })
 
-app.delete('/coversations', (request, response) => {
-
+app.delete('/conversations/:id', async(request, response) => {
+    await Conversation.relatedQuery('mutations')
+    .for(request.params.id)
+    .delete()
+    await Conversation.query().deleteById(request.params.id);
 })
