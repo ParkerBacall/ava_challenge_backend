@@ -45,7 +45,6 @@ app.get('/info', (request, response) => {
 })
 
 app.post('/mutations', async (request, response) =>{
-
     if (await Conversation.query().findById(request.body.conversationId)){
         queries.mutations.create(request.body)
         .then(res => response.send(res))  
@@ -62,6 +61,19 @@ app.post('/mutations', async (request, response) =>{
     }
     
 })
+
+app.patch('/conversations', async (request, response) => {
+    await Conversation.query()
+        .findById(request.body.id)
+        .patch({
+        text: request.body.text,
+        lastMutation: request.body.lastMutation
+        })
+        response.send({
+            'text': request.body.text,
+            'lastMutation': request.body.lastMutation
+        })
+    })
 
 app.get('/conversations', async (request, response) => {
     const conversations = await Conversation.query()
