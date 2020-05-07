@@ -44,10 +44,20 @@ app.get('/info', (request, response) => {
     })
 })
 
-app.post('/mutations', (request, response) =>{
-    queries.mutations.create(request.body)
-    .then(res => response.send(res))  
-    .withFe
+app.post('/mutations', async (request, response) =>{
+    if (await Conversation.query().findById(request.body.conversationId)){
+         queries.mutations.create(request.body)
+        .then(res => response.send(res))  
+    } else{
+        await Conversation.query().insert({
+            "id": request.body.conversationId,
+            "lastMutation": request.body,
+            "text" : request.body.text
+          })
+          queries.mutations.create(request.body)
+          .then(res => response.send(res))  
+    }
+    
 })
 
 app.get('/conversations', async (request, response) => {
