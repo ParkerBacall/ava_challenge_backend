@@ -45,16 +45,16 @@ app.get('/info', (request, response) => {
 })
 
 app.post('/mutations', async (request, response) =>{
-    if (await Conversation.query().findById(request.body.conversationId)){
-         queries.mutations.create(request.body)
 
+    if (await Conversation.query().findById(request.body.conversationId)){
+        queries.mutations.create(request.body)
         .then(res => response.send(res))  
 
     } else{
         await Conversation.query().insert({
             "id": request.body.conversationId,
             "lastMutation": request.body,
-            "text" : request.body.text
+            "text" : request.body.data.text
           })
           queries.mutations.create(request.body)
 

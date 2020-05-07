@@ -1,11 +1,6 @@
 const database = require('./database')
 
 module.exports = {
-    conversations: {
-        create(){
-
-        },
-    },
     mutations: {
         create(input){
         return database('mutations')
