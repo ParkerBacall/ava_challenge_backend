@@ -3,7 +3,7 @@ exports.up = function(knex) {
     return knex.schema.createTable('mutations', function(t) {
     t.increments('id')
     t.string('author')
-    t.integer('conversationId').references('conversations.id')
+    t.string('conversationId').references('conversations.id')
     t.integer('index')
     t.integer('length')
     t.string('type')
