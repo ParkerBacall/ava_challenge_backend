@@ -29,7 +29,7 @@ app.get('/info', (request, response) => {
               "name": "Parker Bacall"
             },
             "frontend": {
-              "url": ""
+              "url": "https://ava-string-editor.web.app/"
             },
             "language": "node.js",
             "sources": {
@@ -37,9 +37,9 @@ app.get('/info', (request, response) => {
                 "backend": "https://github.com/ParkerBacall/ava_challenge_backend"
             },
             "answers": {
-              "1": "string, answer to the question 1",
+              "1": "",
               "2": "string, answer to the question 2",
-              "3": "string, answer to the question 3"
+              "3": "I can't really say much that I would add, as I am just not sure exactly what the team is looking for. However I would personally add more room for creativity. There is a lot of cool functionallity I would have added on the frontend but unfortunetly I was bogged down by the difficulty of the challenge."
             }
     })
 })
